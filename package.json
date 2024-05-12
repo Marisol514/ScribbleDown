@@ -1,18 +1,18 @@
 {
   "name": "JATE",
   "version": "1.0.0",
-  "description": "",
+  "description": "Just Another Text Editor",
   "main": "server.js",
   "scripts": {
-    "start:dev": "",
-    "start": "",
-    "server": "",
-    "build": "",
-    "install": "",
-    "client": ""
+    "start": "node src/server.js",
+"start:dev": "nodemon src/server.js",
+"server": "node src/server.js",
+    "build": "echo 'No build step required' || true",
+    "client": "cd client && npm start",
+    "dev": "concurrently \"npm run start:dev\" \"npm run client\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["text-editor", "web-app"],
+  "author": "Marisol Aranda",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
@@ -23,3 +23,4 @@
     "nodemon": "^2.0.4"
   }
 }
+

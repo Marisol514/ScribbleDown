@@ -1,3 +1,5 @@
+let deferredPrompt; // Declare deferredPrompt as a global variable
+
 const butInstall = document.getElementById('buttonInstall');
 
 // Logic for installing the PWA
@@ -16,7 +18,7 @@ butInstall.addEventListener('click', async () => {
         console.log(`User response to the install prompt: ${outcome}`);
         deferredPrompt = null;  // Clear the deferred prompt so it can only be used once
         butInstall.style.display = 'none';  // Optionally hide the install button after prompt
-      } 
+    } 
 });
 
 // TODO: Add an handler for the `appinstalled` event

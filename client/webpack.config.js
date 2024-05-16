@@ -16,11 +16,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './src/images/favicon.ico'
+      template: './index.html',
+      favicon: './favicon.ico'
     }),
     new InjectManifest({
-      swSrc: './src/src-sw.js',
+      swSrc: './src-sw.js',
       swDest: 'service-worker.js',
     }),
     new WebpackPwaManifest({

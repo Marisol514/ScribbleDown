@@ -1,4 +1,3 @@
-// webpack.common.js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
@@ -31,7 +30,7 @@ module.exports = {
       crossorigin: 'use-credentials',
       icons: [
         {
-          src: path.resolve('src/images/logo.png'),
+          src: path.resolve(__dirname, 'src/images/logo.png'),
           sizes: [96, 128, 192, 256, 384, 512]
         }
       ]

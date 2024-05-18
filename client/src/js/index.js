@@ -6,44 +6,28 @@ import '../css/style.css';
 const main = document.querySelector('#main');
 main.innerHTML = '';
 
-// Function to create and append spinner
 const loadSpinner = () => {
   const spinner = document.createElement('div');
   spinner.classList.add('spinner');
-  spinner.innerHTML = '<div class="loading-container"><div class="loading-spinner"></div></div>';
+  spinner.innerHTML = `
+  <div class="loading-container">
+  <div class="loading-spinner" />
+  </div>
+  `;
   main.appendChild(spinner);
 };
 
-// Initialize the editor
-let editor;
-if (typeof Editor !== 'undefined') {
-  editor = new Editor();
-} else {
-  console.error('Editor is not defined');
-}
+const editor = new Editor();
 
-// Check if editor is ready, if not, show spinner
 if (typeof editor === 'undefined') {
   loadSpinner();
-} else {
-  editor.ready.then(() => {
-    const spinner = document.querySelector('.spinner');
-    if (spinner) {
-      main.removeChild(spinner);
-    }
-  }).catch(error => {
-    console.error('Failed to initialize the editor:', error);
-  });
 }
 
-// Register the service worker
+// Check if service workers are supported
 if ('serviceWorker' in navigator) {
+  // register workbox service worker
   const workboxSW = new Workbox('/src-sw.js');
-  workboxSW.register().then(() => {
-    console.log('Service worker registered successfully');
-  }).catch(error => {
-    console.error('Service worker registration failed:', error);
-  });
+  workboxSW.register();
 } else {
   console.error('Service workers are not supported in this browser.');
 }

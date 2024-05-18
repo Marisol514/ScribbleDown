@@ -1,6 +1,5 @@
 import { openDB } from 'idb';
 
-// Initialize the database
 const initdb = async () =>
   openDB('jate', 1, {
     upgrade(db) {
@@ -13,28 +12,27 @@ const initdb = async () =>
     },
   });
 
-// Add or update an entry in the database
+// TODO: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => {
-  console.log('Saving to the database');
-  const db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readwrite');
+  console.error('putDb not implemented');
+  const textDB = await openDB('jate', 1);
+  const tx = textDB.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  // Assuming only one entry is being stored for simplicity. Using id: 1 as a constant key.
-  const request = store.put({ id: 1, value: content });
+  const request = store.put({ id: 1, jate: content });
   const result = await request;
-  console.log('🚀 - data saved to the database', result);
+  console.log('Data saved tot he DB', result);
 };
 
-// Retrieve the content from the database
+
+// TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () => {
-  console.log('Loading from the database');
-  const db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readonly');
+  console.error('getDb not implemented');
+  const textDB = await openDB('jate', 1);
+  const tx = textDB.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
-  const request = store.get(1);
+  const request = store.getAll();
   const result = await request;
-  return result?.value;
-};
-
-// Initialize the database when the module is loaded
+  console.log('result.value', result);
+  return result;
+}
 initdb();

@@ -6,6 +6,7 @@ import '../css/style.css';
 const main = document.querySelector('#main');
 main.innerHTML = '';
 
+// Function to create and append spinner
 const loadSpinner = () => {
   const spinner = document.createElement('div');
   spinner.classList.add('spinner');
@@ -13,19 +14,27 @@ const loadSpinner = () => {
   main.appendChild(spinner);
 };
 
-// Show the spinner while waiting for the editor to load data
-loadSpinner();
+// Initialize the editor
+let editor;
+if (typeof Editor !== 'undefined') {
+  editor = new Editor();
+} else {
+  console.error('Editor is not defined');
+}
 
-// Initialize the editor and remove the spinner once it's ready
-const editor = new Editor();
-editor.ready.then(() => {
-  const spinner = document.querySelector('.spinner');
-  if (spinner) {
-    main.removeChild(spinner);
-  }
-}).catch(error => {
-  console.error('Failed to initialize the editor:', error);
-});
+// Check if editor is ready, if not, show spinner
+if (typeof editor === 'undefined') {
+  loadSpinner();
+} else {
+  editor.ready.then(() => {
+    const spinner = document.querySelector('.spinner');
+    if (spinner) {
+      main.removeChild(spinner);
+    }
+  }).catch(error => {
+    console.error('Failed to initialize the editor:', error);
+  });
+}
 
 // Register the service worker
 if ('serviceWorker' in navigator) {
